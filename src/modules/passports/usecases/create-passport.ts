@@ -5,7 +5,11 @@ import AppError from '@shared/errors/AppError';
 import { Passport } from '../models/passport';
 import { PassportValidator } from '../validators';
 
-export class CreatePassport {
+export interface CreatePassport {
+  create(passport: any): Passport
+}
+
+export class CreatePassportFactory implements CreatePassport {
   constructor(private readonly passportValidator: PassportValidator) { }
   create(passport: any): Passport {
     const isValid = this.passportValidator.isValid(passport);
