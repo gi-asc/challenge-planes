@@ -17,7 +17,9 @@
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/ioredis": "^4.26.6",
     "@types/node": "^16.4.10",
+    "@types/redis": "^2.8.31",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "^7.32.0",
@@ -38,8 +40,10 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "ioredis": "^4.27.7",
     "moment": "^2.29.1",
     "pg": "^8.7.1",
+    "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.36",
     "validator": "^13.6.0"
