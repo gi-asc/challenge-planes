@@ -1,4 +1,3 @@
-import { Passport } from '@modules/passports/models/passport';
 import {
   Column,
   CreateDateColumn,

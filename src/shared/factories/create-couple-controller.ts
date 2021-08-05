@@ -1,4 +1,4 @@
-import { CreatePassengerController } from '@modules/passengers/controllers/create-passenger';
+import { CreateCoupleController } from '@modules/passengers/controllers/create-couple';
 import { DbPassengerRepository } from '@modules/passengers/typeorm/repository/db-passenger-repository';
 import { CreatePassengerService } from '@modules/passengers/typeorm/services/create-passenger';
 import { CreatePassportService } from '@modules/passports/services/create-passport-service';
@@ -18,7 +18,7 @@ import { FindRouteByRedis } from '@modules/routes/redis/find-route-by-redis';
 import { Controller } from '@shared/controller';
 import RedisModel from '@shared/redis/redis-model';
 
-export const makeCreatePassenger = (): Controller => {
+export const makeCreateCouple = (): Controller => {
   const cpfValidator = new CpfValidatorAdapter();
   const birthDateValidator = new BirthDateValidatorAdapter();
   const visaValidator = new VisaValidatorAdapter();
@@ -52,7 +52,7 @@ export const makeCreatePassenger = (): Controller => {
     passengerRepository,
   );
 
-  return new CreatePassengerController(
+  return new CreateCoupleController(
     createPassportService,
     createPassengerService,
     changePlane,

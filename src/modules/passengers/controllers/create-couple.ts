@@ -8,7 +8,7 @@ import { HttpRequest, HttpResponse } from '@shared/http/protocols/http';
 import { Location } from '@shared/location';
 import { CreatePassengerService } from '../typeorm/services/create-passenger';
 
-export class CreatePassengerController implements Controller {
+export class CreateCoupleController implements Controller {
   constructor(
     private readonly createPassportService: CreatePassportService,
     private readonly createPassengerService: CreatePassengerService,
@@ -17,24 +17,36 @@ export class CreatePassengerController implements Controller {
   ) { }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const pass = this.createPassport.generate(httpRequest.body.passport)
-    const passport = await this.createPassportService.execute(
-      pass
+    const pass1 = this.createPassport.generate(httpRequest.body.passports[0])
+    const pass2 = this.createPassport.generate(httpRequest.body.passports[1])
+    const passport1 = await this.createPassportService.execute(
+      pass1
+    );
+    const passport2 = await this.createPassportService.execute(
+      pass2
     );
     const plane = await this.changePlane.findForPlane(
       httpRequest.body.startPoint,
       httpRequest.body.destiny,
-      1,
+      2,
     );
-    const passenger = await this.createPassengerService.execute(
-      passport.cpf,
+    const passenger1 = await this.createPassengerService.execute(
+      passport1.cpf,
       plane.id,
       httpRequest.body.startPoint as Location,
       httpRequest.body.destiny as Location,
+      pass2.cpf
+    );
+    const passenger2 = await this.createPassengerService.execute(
+      passport2.cpf,
+      plane.id,
+      httpRequest.body.startPoint as Location,
+      httpRequest.body.destiny as Location,
+      pass1.cpf
     );
     return ok({
-      passenger: passenger,
-      passport: passport,
+      passengers: [passenger1, passenger2],
+      passports: [passport1, passport2],
       plane: plane
     });
   }

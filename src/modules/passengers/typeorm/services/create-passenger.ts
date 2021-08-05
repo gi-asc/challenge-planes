@@ -17,7 +17,7 @@ export class CreatePassengerService {
     plane_id: number,
     startPoint: Location,
     destiny: Location,
-    spouse_id = undefined,
+    spouse_id: string | null,
   ): Promise<PassengerEntity> {
     const repository = getCustomRepository(DbPassengerRepository)
     const passenger = repository.create({
@@ -27,7 +27,7 @@ export class CreatePassengerService {
       destiny: destiny,
     });
 
-    if (spouse_id !== undefined) {
+    if (spouse_id !== null) {
       passenger.spouse_id = spouse_id;
     }
 
