@@ -43,6 +43,7 @@
     "ioredis": "^4.27.7",
     "moment": "^2.29.1",
     "pg": "^8.7.1",
+    "promise-redis": "0.0.5",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.36",

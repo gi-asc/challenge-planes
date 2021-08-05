@@ -1,21 +1,16 @@
 import { Validator } from '@shared/usecases/validator';
-import moment from 'moment';
 
 export interface BirthDateValidator extends Validator {
   birthDateValidation(birthDate: string): boolean;
 }
 
 export class BirthDateValidatorAdapter implements BirthDateValidator {
-  isDate(date: string): boolean {
-    return moment(date).isValid();
-  }
-
   birthDateValidation(date: string): boolean {
-    const isDate = this.isDate(date);
-    const now = moment();
-    const birth = moment(date);
-    const diff = now.subtract(10, 'years');
-    if (isDate && diff.isAfter(birth)) {
+    const birth = new Date(date);
+    const now = new Date();
+    const timeDiff = Math.abs(now.getTime() - birth.getTime());
+    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24 * 365));
+    if (diffDays >= 10) {
       return true;
     }
     return false;

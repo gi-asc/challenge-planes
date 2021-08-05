@@ -17,6 +17,14 @@ export class CreatePassports1628026430113 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'nationality',
+            type: 'varchar',
+          },
+          {
+            name: 'visa',
+            type: 'varchar',
+          },
+          {
             name: 'birthDate',
             type: 'timestamp with time zone',
           },

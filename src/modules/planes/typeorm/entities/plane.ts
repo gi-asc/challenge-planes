@@ -1,12 +1,9 @@
-import { PassengerEntity } from '@modules/passengers/typeorm/entities/passenger';
-import { Plane } from '@modules/planes/models/plane';
-import { RouteEntity } from '@modules/routes/typeorm/entities/route';
+import { PassengerEntity } from '../../../passengers/typeorm/entities/passenger';
+import { Plane } from '../../models/plane';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
@@ -24,8 +21,6 @@ export class PlaneEntity implements Plane {
   departure_time: Date;
 
   @Column()
-  @ManyToOne(() => RouteEntity, routeEntity => routeEntity.id)
-  @JoinColumn()
   route_id: number;
 
   @OneToMany(() => PassengerEntity, passengerEntity => passengerEntity.plane_id)

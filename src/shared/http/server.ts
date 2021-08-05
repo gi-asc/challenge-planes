@@ -1,7 +1,7 @@
+import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
-
-import 'reflect-metadata';
+import 'express-async-errors';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes';
@@ -23,9 +23,10 @@ app.use(
       });
     }
 
+    console.log(error.stack);
     return response.status(400).json({
       status: 'error',
-      message: 'Internal server error',
+      message: error.message,
     });
   },
 );

@@ -1,3 +1,3 @@
 export interface Validator {
-  isValid(data: unknown): boolean;
+  isValid(data: any): boolean;
 }

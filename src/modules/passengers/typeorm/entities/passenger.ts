@@ -2,15 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Passenger } from '@modules/passengers/models/passenger';
-import { PassportEntity } from '@modules/passports/typeorm/entities/passport';
-import { PlaneEntity } from '@modules/planes/typeorm/entities/plane';
+import { Passenger } from '../../models/passenger';
 import { Location } from '@shared/location';
 
 @Entity('passengers')
@@ -18,15 +13,17 @@ export class PassengerEntity implements Passenger {
   @PrimaryColumn({
     length: 11,
   })
-  @OneToOne(() => PassportEntity, passportEntity => passportEntity.cpf, {
-    cascade: true,
-  })
-  @JoinColumn()
   id: string;
 
-  @ManyToOne(() => PlaneEntity, planeEntity => planeEntity.id)
-  @JoinColumn()
+  @Column()
   plane_id: number;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
+    length: 11,
+  })
+  spouse_id?: string;
 
   @Column({
     type: 'json',

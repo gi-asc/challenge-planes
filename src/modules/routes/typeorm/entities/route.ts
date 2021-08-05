@@ -1,4 +1,4 @@
-import { PlaneEntity } from '@modules/planes/entities/plane';
+import { PlaneEntity } from '../../../planes/typeorm/entities/plane';
 import {
   Column,
   CreateDateColumn,

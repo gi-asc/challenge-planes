@@ -9,7 +9,7 @@ export class VisaValidatorAdapter implements VisaValidator {
   visa: 'brasil';
 
   isAcceptedVisa(visas: Array<string>): boolean {
-    return visas.includes(this.visa);
+    return visas.includes('brasil');
   }
 
   isValid(visas: Array<string>): boolean {

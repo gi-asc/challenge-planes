@@ -5,7 +5,7 @@ import { Route } from '../models/route';
 import { FindRoute } from '../usecases/find-route';
 
 export class FindRouteByRedis implements FindRoute {
-  constructor(private readonly redisModel: RedisModel) { }
+  constructor(private readonly redisModel = RedisModel) { }
 
   async find(startPoint: Location, destiny: Location): Promise<Route> {
     const pattern = `*${startPoint.state}*${destiny.state}*`;

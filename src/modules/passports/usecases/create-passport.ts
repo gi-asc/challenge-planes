@@ -6,22 +6,26 @@ import { Passport } from '../models/passport';
 import { PassportValidator } from '../validators';
 
 export interface CreatePassport {
-  create(passport: any): Passport
+  generate(passport: any): Passport
 }
+
+
 
 export class CreatePassportFactory implements CreatePassport {
   constructor(private readonly passportValidator: PassportValidator) { }
-  create(passport: any): Passport {
+  generate(passport: any): Passport {
     const isValid = this.passportValidator.isValid(passport);
     if (!isValid) {
-      throw new AppError('Invalid Passport', 400);
+      throw new AppError("invalid passport")
     }
-    return {
+    const passports: Passport = {
       cpf: passport.cpf,
       name: passport.name,
       birthDate: new Date(passport.birthDate),
       nationality: passport.nationality,
       visa: passport.visa,
     };
+
+    return passports
   }
 }

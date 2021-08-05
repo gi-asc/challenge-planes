@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('passports')
-export class PassportEntity implements Passport {
+export class PassportEntity {
   @PrimaryColumn()
   cpf: string;
 
@@ -22,6 +22,7 @@ export class PassportEntity implements Passport {
   nationality: string;
 
   @Column({
+    type: 'varchar',
     array: true,
   })
   visa: Array<string>;

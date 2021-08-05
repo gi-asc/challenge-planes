@@ -6,7 +6,7 @@ import { PassengerEntity } from '../entities/passenger';
 
 @EntityRepository(PassengerEntity)
 // eslint-disable-next-line prettier/prettier
-export class DbPassportRepository
+export class DbPassengerRepository
   extends Repository<PassengerEntity>
   implements PassengerRepository {
   async findByPlane(plane_id: number): Promise<PassengerEntity[]> {

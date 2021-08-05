@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import AppError from '@shared/errors/AppError';
 import { Validator } from '@shared/usecases/validator';
 import {
   BirthDateValidator,
@@ -26,25 +27,25 @@ export class PassportValidatorAdapter implements PassportValidator {
     const fields = ['name', 'cpf', 'birthDate', 'nationality', 'visa'];
     for (const field of fields) {
       if (!passport[field]) {
-        return false;
+        throw new AppError(`missing ${field}`);
       }
     }
     const { cpf, birthDate, nationality, visa } = passport;
 
     if (!this.cpfValidator.isValid(cpf)) {
-      return false;
+      throw new AppError('invalid cpf');
     }
 
     if (!this.birthDateValidator.isValid(birthDate)) {
-      return false;
+      throw new AppError('invalid birthDate');
     }
 
     if (!this.nationalityValidator.isValid(nationality)) {
-      return false;
+      throw new AppError('invalid nationality');
     }
 
     if (!this.visaValidator.isValid(visa)) {
-      return false;
+      throw new AppError('invalid visa');
     }
     return true;
   }

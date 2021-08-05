@@ -6,6 +6,8 @@ import { Plane } from '@modules/planes/models/plane';
 import { FindPlaneForRouteId } from './find-plane-by-route-id';
 import AppError from '@shared/errors/AppError';
 import { PassengerRepository } from '@modules/passengers/usecases/passenger-repository';
+import { getCustomRepository } from 'typeorm';
+import { DbPassengerRepository } from '@modules/passengers/typeorm/repository/db-passenger-repository';
 
 export interface ChangePlane {
   change(route: Route): Promise<Plane[]>;
@@ -28,6 +30,7 @@ export class ChangePlaneAdapter implements ChangePlane {
     destiny: Location,
     numPassengers = 1,
   ): Promise<Plane> {
+    const passRep = getCustomRepository(DbPassengerRepository)
     const route = await this.findRoute.find(startPoint, destiny);
     if (route === null) {
       throw new Error('route not found');
@@ -36,7 +39,7 @@ export class ChangePlaneAdapter implements ChangePlane {
     let planeOk: Plane | null;
     planeOk = null;
     for (let i = 0; i < planes.length; i++) {
-      const passengers = await this.passengerRepository.findByPlane(
+      const passengers = await passRep.findByPlane(
         planes[i].id,
       );
       if (passengers.length + numPassengers <= 8) {

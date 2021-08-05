@@ -1,10 +1,15 @@
 import redisConfig from './redis-config';
 import Redis, { Redis as RedisClient } from 'ioredis';
 
-export default class RedisModel {
+class RedisModel {
   private client: RedisClient;
+  private connected = false;
+
   constructor() {
-    this.client = new Redis(redisConfig.config.redis);
+    if (!this.connected) {
+      this.client = new Redis(redisConfig.config.redis);
+      this.connected = true;
+    }
   }
 
   public async find<T>(key: string): Promise<T | null> {
@@ -21,3 +26,4 @@ export default class RedisModel {
     return key;
   }
 }
+export default new RedisModel();
