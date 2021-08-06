@@ -13,7 +13,7 @@ import {
 } from '@modules/passports/validators';
 import { ChangePlaneAdapter } from '@modules/planes/services/change-plane';
 import { FindPlaneForRouteIdAdapter } from '@modules/planes/services/find-plane-by-route-id';
-import { FindPlaneRepositoryAdapter } from '@modules/planes/services/find-plane-repository';
+import { PlaneRepositoryAdapter } from '@modules/planes/services/find-plane-repository';
 import { FindRouteByRedis } from '@modules/routes/redis/find-route-by-redis';
 import { Controller } from '@shared/controller';
 import RedisModel from '@shared/redis/redis-model';
@@ -42,7 +42,7 @@ export const makeCreateCouple = (): Controller => {
   const redisModel = RedisModel;
   const findRoute = new FindRouteByRedis(redisModel);
 
-  const findPlaneRepository = new FindPlaneRepositoryAdapter();
+  const findPlaneRepository = new PlaneRepositoryAdapter();
   const findPlaneByRouteId = new FindPlaneForRouteIdAdapter(
     findPlaneRepository,
   );

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { FindPlaneRepository, FindPlaneRepositoryAdapter } from './find-plane-repository';
+import { PlaneRepository, PlaneRepositoryAdapter } from './find-plane-repository';
 import { PlaneEntity } from '../typeorm/entities/plane';
 import { getCustomRepository } from 'typeorm';
 
@@ -8,10 +8,10 @@ export interface FindPlaneForRouteId {
 }
 
 export class FindPlaneForRouteIdAdapter implements FindPlaneForRouteId {
-  constructor(private readonly findPlaneRepository: FindPlaneRepository) { }
+  constructor(private readonly findPlaneRepository: PlaneRepository) { }
 
   async find(routeId: number): Promise<PlaneEntity[]> {
-    const repository = getCustomRepository(FindPlaneRepositoryAdapter)
+    const repository = getCustomRepository(PlaneRepositoryAdapter)
     return repository.findForRoute(routeId);
   }
 }

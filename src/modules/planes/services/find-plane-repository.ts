@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
-import { EntityRepository, Repository } from 'typeorm';
+import { DeepPartial, EntityRepository, Repository } from 'typeorm';
+import { Plane } from '../models/plane';
 import { PlaneEntity } from '../typeorm/entities/plane';
-export interface FindPlaneRepository {
+export interface PlaneRepository {
   findForRoute(routeId: number): Promise<PlaneEntity[]>;
 }
 
 @EntityRepository(PlaneEntity)
-export class FindPlaneRepositoryAdapter
+export class PlaneRepositoryAdapter
   extends Repository<PlaneEntity>
-  implements FindPlaneRepository {
+  implements PlaneRepository {
   async findForRoute(route_id: number): Promise<PlaneEntity[]> {
     const planes = await this.find({
       where: {
@@ -17,5 +18,11 @@ export class FindPlaneRepositoryAdapter
     });
 
     return planes;
+  }
+
+  async createPlane(plane: DeepPartial<Plane>): Promise<PlaneEntity> {
+    const planes = this.create(plane)
+    const saves = await this.save(planes)
+    return saves
   }
 }
