@@ -6,6 +6,7 @@ import { HttpRequest, HttpResponse } from '@shared/http/protocols/http';
 import { DeepPartial } from 'typeorm';
 import { Plane } from '../models/plane';
 import { CreatePlane } from '../services/create-plane';
+import { CommanderValidator } from '../validators/commander-validator';
 import { DepartureTimeValidator } from '../validators/departure-time-validator';
 import { RouteValidator } from '../validators/route-validator';
 
@@ -13,7 +14,8 @@ export class CreatePlaneController implements Controller {
   constructor(
     private readonly departureTimeValidator: DepartureTimeValidator,
     private readonly routeValidator: RouteValidator,
-    private readonly createPlane: CreatePlane
+    private readonly createPlane: CreatePlane,
+    private readonly commanderValidator: CommanderValidator
   ) { }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -25,7 +27,7 @@ export class CreatePlaneController implements Controller {
         throw new AppError(`Missing Param: ${field}`);
       }
     }
-    const { router_id, departure_time } = httpRequest.body
+    const { router_id, departure_time, commander } = httpRequest.body
 
     if (!this.departureTimeValidator.isValid(departure_time)) {
       throw new AppError('Invalid departure time')
@@ -34,12 +36,17 @@ export class CreatePlaneController implements Controller {
     if (!this.routeValidator.isValid(router_id)) {
       throw new AppError('Invalid route')
     }
+
+    if (!this.commanderValidator.isValid(commander)) {
+      throw new AppError('Invalid commander')
+
+    }
     const route: number = router_id;
-    const commander: string = plane.commander;
+    const commanderExist: string = plane.commander;
     const departure: Date = new Date(departure_time)
 
     const planeOk: DeepPartial<Plane> = {
-      commander: commander,
+      commander: commanderExist,
       route_id: route,
       departure_time: departure
     }

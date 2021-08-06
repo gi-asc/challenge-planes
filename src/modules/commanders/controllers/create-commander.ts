@@ -3,7 +3,6 @@ import { Controller } from '@shared/controller';
 import AppError from '@shared/errors/AppError';
 import { ok } from '@shared/http/helper';
 import { HttpRequest, HttpResponse } from '@shared/http/protocols/http';
-import { CommanderEntity } from '../typeorm/entities/commander';
 import { CreateCommanderService } from '../typeorm/services/create-commander';
 import { CreateCommander } from '../usecases/create-commander';
 
