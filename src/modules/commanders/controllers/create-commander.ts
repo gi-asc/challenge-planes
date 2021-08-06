@@ -19,7 +19,7 @@ export class CreateCommanderController implements Controller {
       }
     }
     const commander = this.createCommander.create(httpRequest.body.name, httpRequest.body.email)
-    const commanderOk = this.createCommanderService.execute(commander)
+    const commanderOk = await this.createCommanderService.execute(commander)
     return ok({
       commander: commanderOk
     })
