@@ -1,4 +1,5 @@
 import { controllerAdapter } from '@shared/adapters/http';
+import { makeCreateCommander } from '@shared/factories/create-commander-controller';
 import { makeCreateCouple } from '@shared/factories/create-couple-controller';
 import { makeCreatePassenger } from '@shared/factories/create-passenger-controller-factory';
 import { makeCreatePlane } from '@shared/factories/create-plane-controller';
@@ -15,4 +16,5 @@ routes.get('/', (request, response) => {
 routes.post('/createPassenger', controllerAdapter(makeCreatePassenger()));
 routes.post('/createCouple', controllerAdapter(makeCreateCouple()));
 routes.post('/createPlane', controllerAdapter(makeCreatePlane()));
+routes.post('/createCommander', controllerAdapter(makeCreateCommander()));
 export default routes;
