@@ -6,7 +6,11 @@ import { FindRouteById } from '@modules/routes/typeorm/services/find-route-by-id
 import AppError from '@shared/errors/AppError';
 import { Report } from '../models/report';
 
-export class GenerateReportAdapter {
+export interface GenerateReport {
+  generate(plane_id: number): Promise<Report>
+}
+
+export class GenerateReportAdapter implements GenerateReport {
   constructor(
     private readonly findPassengersByPlaneId: FindPassengersByPlaneIdService,
     private readonly findPlaneById: FindPlaneById,

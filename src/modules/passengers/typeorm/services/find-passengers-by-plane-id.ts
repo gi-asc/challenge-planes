@@ -1,7 +1,4 @@
 /* eslint-disable prettier/prettier */
-import { PassengerRepository } from '@modules/passengers/usecases/passenger-repository';
-import { PassportRepository } from '@modules/passports/usecases/passport-repository';
-import { Location } from '@shared/location';
 import { getCustomRepository } from 'typeorm';
 import { PassengerEntity } from '../entities/passenger';
 import { DbPassengerRepository } from '../repository/db-passenger-repository';
