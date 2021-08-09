@@ -26,7 +26,7 @@ export class DbCommanderRepository
 
   async createCommander(commander: Commander): Promise<CommanderEntity> {
     const withName = this.findByName(commander.name)
-    if (withName != undefined) {
+    if (withName instanceof CommanderEntity) {
       throw new AppError("existing commander")
     }
     const commanderCreate = this.create(commander)
