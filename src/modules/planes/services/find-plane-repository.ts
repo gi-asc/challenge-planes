@@ -28,9 +28,8 @@ export class PlaneRepositoryAdapter
 
   async findByDeparture(departure_init: string, departure_final: string): Promise<PlaneEntity[]> {
     const planes = await this.find({
-      where: {
-        departure_time: Between(departure_init, departure_final)
-      }
+      departure_time: Between(departure_init, departure_final
+      )
     });
     return planes
   }

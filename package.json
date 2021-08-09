@@ -21,6 +21,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.12",
+    "@types/cron": "^1.7.3",
     "@types/express": "^4.17.13",
     "@types/ioredis": "^4.26.6",
     "@types/jest": "^26.0.24",
@@ -30,6 +31,7 @@
     "@types/redis": "^2.8.31",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
+    "cron": "^1.8.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",
