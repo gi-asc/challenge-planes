@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { DeepPartial, EntityRepository, Repository } from 'typeorm';
+import { Between, DeepPartial, EntityRepository, Repository } from 'typeorm';
 import { Plane } from '../models/plane';
 import { PlaneEntity } from '../typeorm/entities/plane';
 export interface PlaneRepository {
@@ -24,5 +24,14 @@ export class PlaneRepositoryAdapter
     const planes = this.create(plane)
     const saves = await this.save(planes)
     return saves
+  }
+
+  async findByDeparture(departure_init: string, departure_final: string): Promise<PlaneEntity[]> {
+    const planes = await this.find({
+      where: {
+        departure_time: Between(departure_init, departure_final)
+      }
+    });
+    return planes
   }
 }
