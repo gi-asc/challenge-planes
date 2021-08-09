@@ -1,13 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { DbCommanderRepository } from '@modules/commanders/typeorm/repository/commander-repository';
-import { FindPassengersByPlaneIdService } from '@modules/passengers/typeorm/services/find-passengers-by-plane-id';
-import { FindPlaneByDepartureService } from '@modules/planes/services/find-plane-by-departure';
-import { PlaneRepositoryAdapter } from '@modules/planes/services/find-plane-repository';
 import { ReportEmail } from '@modules/reports/email';
 import moment from 'moment';
 import { getCustomRepository } from 'typeorm';
 import { GenerateFile } from '../generate-file';
-import { UpdateCsvAdapter } from '../update-csv';
 
 export class SendMail {
   constructor(
